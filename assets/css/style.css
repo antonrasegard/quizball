@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
 *, *::before, *::after {
-    box-sizing: border-box;
     font-family: "Josefin Sans", sans-serif;
 }
 
@@ -39,7 +38,13 @@ body.wrong {
     padding: 15px;
 }
 
-.btn-grid {
+#question {
+    font-size: 24px;
+    text-align: center;
+    color: white;
+}
+
+.btn-styles {
     display: grid;
     grid-template-columns: repeat(3, auto);
     gap: 8px;
@@ -70,5 +75,15 @@ body.wrong {
 .play-btn, .firstdown-btn {
     font-size: 24px;
     font-weight: bold;
-    padding: 15px 15px;
+    padding: 15px 20px;
+}
+
+.ctrls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
 }
