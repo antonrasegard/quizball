@@ -7,7 +7,13 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 
 let shuffledQuestions, currentQuestionIndex
 
+let score = 0;
+
 playButton.addEventListener('click', playGame)
+firstdownButton.addEventListener('click', () => {
+    currentQuestionIndex++
+    setNextQuestion()
+})
 
 function playGame() {
     console.log('Started')
@@ -38,6 +44,7 @@ function showQuestion(question) {
 }
 
 function resetState() {
+    clearStatusClass(document.body)
     firstdownButton.classList.add('hide')
     while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
@@ -51,6 +58,17 @@ function selectAnswer(e) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        firstdownButton.classList.remove('hide')
+    } else {
+        playButton.innerText = 'Restart'
+        playButton.classList.remove('hide')
+    }
+    if ('click', correct) {
+        alert('Touchdown!')
+    } else {
+        alert('Intercepted by Demarious Randall!')
+    }
 }
 
 function setStatusClass(element, correct) {
@@ -62,16 +80,32 @@ function setStatusClass(element, correct) {
     }
 }
 
+function clearStatusClass(element) {
+    element.classList.remove('correct')
+    element.classList.remove('wrong')
+}
+
 const questions = [
     {
-        question: 'Who of these players has won the most Super Bowls with the same team?',
+        question: 'Which one of these players has won the most Super Bowls with the same team?',
         answers: [
             { text: '"Broadway Joe" Nemeth', correct: false },
             { text: 'Franco Harris', correct: false },
             { text: 'Tom Brady', correct: true },
             { text: 'Nathan Peterman', correct: false },
-            { text: 'Marky Mark', correct: false },
+            { text: '"Marky Mark" Wahlberg', correct: false },
             { text: 'Terrell Suggs', correct: false }
         ]
-    }
+    },
+    {
+        question: 'Which one of these coaches has never coached the Cleveland Browns?',
+        answers: [
+            { text: '"Romeo Crennel', correct: false },
+            { text: 'Marty Schottenheimer', correct: false },
+            { text: 'Percival Cox', correct: true },
+            { text: 'Pat Shurmur', correct: false },
+            { text: 'Bill Belichick', correct: false },
+            { text: 'Forrest Gregg', correct: false }
+        ]
+    },
 ]
